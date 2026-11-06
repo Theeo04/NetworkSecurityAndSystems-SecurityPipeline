@@ -1,85 +1,22 @@
-# Multi-Architecture Debian Package Security Validation
+# Design and Implementation of a Security CI/CD Pipeline for Multi-Architecture Container Images
 
-**Network and Systems Security — Master's Semester Project**
+1. Introduction to Microprocessors and Historical Background
 
-## Overview
+### What is a microprocessor?
 
-This project explores how automated static analysis and runtime monitoring can validate the security of Debian packages before release.
+It is an integrated circuit that executes instructions stored in memory and performs arithmetic and logical operations by processing binary data. All the operations are executed through machine language instructions, and the microprocessor acts as the brain of a computer, controlling its operations. The physical structure is based on millions or billions of tiny transistors assembled on a semiconductor material to create the key components.
 
-A simple application written in **Rust** will be compiled for **AMD64** and **ARM64**, packaged as `.deb` files, and tested in isolated Debian environments.
+The main workflow that describes the processes of a CPU is the following. First, the instructions are fetched from memory. The instructions are then decoded, the requested operations being interpreted, and finally, the operations are executed and the results are stored in registers or computer memory [1], [2].
 
-## Objectives
+One of the first commercially available microprocessors was created in 1971, called Intel 4004, developed by Intel, and was able to process 4-bit data and perform logical and arithmetic operations. Over the decades, microprocessor architectures have evolved to support 8, 16, 32 and 64-bit processing, nowadays allowing microprocessors to perform increasingly complex operations [1], [2].
 
-- Build Debian packages for AMD64 and ARM64 from the same source code.
-- Inspect packages, dependencies, and potential vulnerabilities.
-- Install and run packages in isolated Debian virtual machines.
-- Monitor processes, permissions, filesystem activity, and network behavior.
-- Compare security findings across the two architectures.
-- Automatically approve or reject release artifacts based on defined security checks.
+### Inside the Microprocessor Structure
 
-## Pipeline
+Every microprocessor has a particular architecture that allows it to perform operations. In simple words, the process can be described as follows: the Control Unit (CU) takes the instructions from memory, interprets them and orchestrates the operations. Now that the operation instructions are clear, the operations are executed by the Arithmetic Logic Unit (ALU), which is responsible for calculations and logical operations orchestrated by the instructions received from the CU.
 
-```text
-Rust Source Code
-       |
-       v
-Build for AMD64 / ARM64
-       |
-       v
-Create .deb Packages
-       |
-       v
-Static Security Analysis
-       |
-       v
-Install in Debian VMs
-       |
-       v
-Runtime Security Tests
-       |
-       v
-Compare Results & Security Gate
-       |
-       +---- PASS --> Publish Packages
-       |
-       +---- FAIL --> Reject Release
-```
+The input and output data used by the microprocessor can be temporarily stored in registers, offering high-speed access to data required for the operations. With the purpose of optimizing calculations and retrieving information faster, the processor uses cache memory to store frequently accessed instructions and data. Cache memory has a larger capacity than registers, but registers provide faster data access [3].
 
-## Planned Security Tests
-
-| Area | What we validate |
-| --- | --- |
-| Static analysis | Known vulnerabilities, dependencies, package metadata, and file permissions |
-| Installation | Package integrity, installation scripts, and system changes |
-| Runtime | Process privileges, unexpected child processes, and filesystem activity |
-| Network | Listening ports and unexpected connections |
-| Compatibility | Installation and execution on AMD64 and ARM64 |
-
-## Technology Candidates
-
-- **Rust** — application development
-- **Debian packaging tools** — `.deb` creation and inspection
-- **GitLab CI/CD** — pipeline automation
-- **Trivy** — vulnerability scanning and SBOM generation
-- **Lintian** — Debian package checks
-- **QEMU/KVM** — isolated virtual machines
-- **Falco / eBPF** — Linux runtime monitoring, where supported
-
-*The exact tooling and test implementation are still being defined.*
-
-## Research Question
-
-> How effectively can automated static security analysis and runtime testing validate Debian packages across AMD64 and ARM64 before release?
-
-## Expected Deliverables
-
-- Automated build and security validation pipeline
-- AMD64 and ARM64 Debian packages
-- Static analysis and runtime security reports
-- Cross-architecture comparison of findings
-- Automated PASS/FAIL release decision
-- Final research report
-
-## Status
-
-**Planning / design phase.**
+# Bibliography:
+- [1]: https://www.ibm.com/think/topics/microprocessor
+- [2]: https://www.geeksforgeeks.org/electronics-engineering/introduction-of-microprocessor/
+- [3]: https://conclusive.tech/glossary/what-is-a-microprocessor-architecture-and-types/
